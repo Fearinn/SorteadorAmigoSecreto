@@ -1,0 +1,50 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`página inicial a renderização ocorre corretamente 1`] = `
+<div>
+  <div
+    class="card"
+  >
+    <form
+      class="formulario"
+    >
+      <h1
+        class="titulo"
+      >
+        Vamos começar!
+      </h1>
+      <div
+        class="container"
+      >
+        <input
+          class="input"
+          placeholder="Insira os nomes dos participantes"
+          type="text"
+          value=""
+        />
+        
+        <button
+          class="botao"
+          disabled=""
+        >
+          Adicionar
+        </button>
+      </div>
+    </form>
+    <ul />
+    <footer
+      class="rodape"
+    >
+      <button
+        class="botao"
+        disabled=""
+      >
+        Iniciar brincadeira
+      </button>
+      <div
+        class="imagem"
+      />
+    </footer>
+  </div>
+</div>
+`;

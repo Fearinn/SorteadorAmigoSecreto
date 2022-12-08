@@ -1,0 +1,34 @@
+.rodape {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  width: 50%;
+
+  @media (min-width: 1024px) {
+    flex-direction: row;
+  }
+}
+
+.botao {
+  background-color: #fe652b;
+  border-radius: 37.5px;
+  border: 1px solid black;
+  box-shadow: 2px 2px 0px black;
+  color: white;
+  height: 3.5rem;
+  width: 9.5rem;
+
+  &:hover {
+    background-color: #4B69FDFC;
+  }
+
+}
+
+.imagem {
+  background: url("/images/ShoppingBags.svg") center / 100% no-repeat;
+  aspect-ratio: 237/183;
+  height: auto;
+  width: 133px;
+}

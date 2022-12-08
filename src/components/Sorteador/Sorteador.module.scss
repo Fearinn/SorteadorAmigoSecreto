@@ -1,0 +1,60 @@
+.section {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 1.5rem;
+  width: 100%;
+}
+
+.formulario {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 1.5rem;
+  width: 100%;
+}
+
+.titulo {
+  color: #4b69fdfc;
+}
+
+.input {
+  border: 1px solid black;
+  border-radius: 37.5px;
+  box-shadow: 2px 2px 0px black;
+  font-size: 1rem;
+  height: 3rem;
+  padding: 0.5rem;
+  text-align: center;
+  width: 100%;
+
+  &:focus {
+    outline: none;
+    border-width: 2px;
+  }
+}
+
+.botao {
+  background-color: #fe652b;
+  border-radius: 37.5px;
+  border: 1px solid black;
+  box-shadow: 2px 2px 0px black;
+  color: white;
+  height: 3.5rem;
+  width: 9.5rem;
+
+  &:hover {
+    background-color: #4b69fdfc;
+  }
+}
+
+.amigo {
+  color: #fe652b;
+}
+
+.imagem {
+  background: url("/images/AviaoPapel.svg") center / 100% no-repeat;
+  aspect-ratio: 150/136;
+  height: auto;
+  width: 128px;
+}

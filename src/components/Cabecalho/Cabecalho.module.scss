@@ -1,0 +1,32 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1rem;
+  width: 100%;
+
+  @media (min-width: 1024px) {
+    flex-direction: row;
+  }
+}
+
+.logo {
+  background-image: url('/images/LogoBrancoHorizontal2.svg');
+  height: 117px;
+  width: 351px;
+}
+
+.image {
+  height: 280px;
+  max-width: 450px;
+  background-image: url('/images/WavyBuddies.svg');
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-position: bottom;
+  position: relative;
+  bottom: -2rem;
+  width: 100%;
+  z-index: 1;
+}

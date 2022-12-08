@@ -1,0 +1,35 @@
+@import-normalize;
+
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap");
+
+html,
+body,
+#root {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  background-color: #4b69fd;
+  color: #444444;
+  min-height: 100vh;
+  min-width: 360px;
+  font-family: "Poppins", sans-serif;
+}
+
+:where(*) {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: inherit;
+}
+
+:where(h1, h2, h3, h4, h5, h6) {
+  text-align: center;
+}
+
+:where(button) {
+  cursor: pointer;
+}
+
+:where(ul, ol) {
+  list-style: none;
+}

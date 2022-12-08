@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`página de sorteio a renderização ocorre corretamente 1`] = `
+<div>
+  <div
+    class="card"
+  >
+    <section
+      class="section"
+    >
+      <h1
+        class="titulo"
+      >
+        Quem vai tirar o papelzinho?
+      </h1>
+      <form
+        class="formulario"
+      >
+        <select
+          class="input"
+          id="participanteDaVez"
+          name="participanteDaVez"
+          placeholder="Selecione o seu nome"
+        />
+        <button
+          class="botao"
+        >
+          Sortear
+        </button>
+      </form>
+      
+      <div
+        class="imagem"
+      />
+    </section>
+  </div>
+</div>
+`;
