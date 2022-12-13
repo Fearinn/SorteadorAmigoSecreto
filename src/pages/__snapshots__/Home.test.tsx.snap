@@ -22,14 +22,29 @@ exports[`página inicial a renderização ocorre corretamente 1`] = `
           type="text"
           value=""
         />
-        
         <button
           class="botao"
           disabled=""
+          type="button"
         >
           Adicionar
         </button>
+        <input
+          class="input"
+          placeholder="Defina uma senha para seu jogo"
+          required=""
+          type="text"
+          value=""
+        />
+        <button
+          class="botao"
+          disabled=""
+          type="button"
+        >
+          Salvar
+        </button>
       </div>
+      
     </form>
     <ul />
     <footer

@@ -1,8 +1,8 @@
-import { useRecoilValue } from "recoil"
+import { useRecoilState} from "recoil"
 import { erro } from "../atom"
 
 const useMensagemDeErro = () => {
-    const mensagemDeErro = useRecoilValue(erro)
+    const mensagemDeErro = useRecoilState(erro)
     return mensagemDeErro
 }
 

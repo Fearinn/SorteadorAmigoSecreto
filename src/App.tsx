@@ -11,7 +11,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Padrao />}>
             <Route index element={<Home />} />
-            <Route path="sorteio" element={<Sorteio />} />
+            <Route path="sorteio/:identificador/:nome" element={<Sorteio />} />
           </Route>
         </Routes>
       </RecoilRoot>

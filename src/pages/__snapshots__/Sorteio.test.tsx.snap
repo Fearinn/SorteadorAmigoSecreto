@@ -10,25 +10,16 @@ exports[`página de sorteio a renderização ocorre corretamente 1`] = `
     >
       <h1
         class="titulo"
+      />
+      <p
+        class="amigo"
+        role="alert"
+      />
+      <button
+        class="botao"
       >
-        Quem vai tirar o papelzinho?
-      </h1>
-      <form
-        class="formulario"
-      >
-        <select
-          class="input"
-          id="participanteDaVez"
-          name="participanteDaVez"
-          placeholder="Selecione o seu nome"
-        />
-        <button
-          class="botao"
-        >
-          Sortear
-        </button>
-      </form>
-      
+        Sortear
+      </button>
       <div
         class="imagem"
       />

@@ -1,28 +1,38 @@
-import React, { useState } from "react";
-import { useListaDeParticipantes } from "../../state/hooks/useListaDeParticipantes";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router";
+import sorteioService from "../../services/amigoSecreto";
 import { useResultadoDoSorteio } from "../../state/hooks/useResultadoDoSorteio";
 import styles from "./Sorteador.module.scss";
 
 const Sorteador = () => {
-  const participantes = useListaDeParticipantes();
-
-  const [participanteDaVez, setParticipanteDaVez] = useState("");
   const [amigoSecreto, setAmigoSecreto] = useState("");
+  const [resultado, setResultado] = useResultadoDoSorteio();
 
-  const resultadoDoSorteio = useResultadoDoSorteio();
+  const params = useParams();
+  const participanteDaVez = params.nome;
 
-  const sortear = (evento: React.FormEvent<HTMLFormElement>) => {
-    evento.preventDefault();
-    if (resultadoDoSorteio.has(participanteDaVez)) {
-      setAmigoSecreto(resultadoDoSorteio.get(participanteDaVez) as string);
+  const service = sorteioService(params.identificador as string);
+
+  function pegaResultados() {
+    console.log("teste");
+    if (resultado.has(participanteDaVez as string)) {
+      setAmigoSecreto(resultado.get(participanteDaVez as string) as string);
       setTimeout(() => setAmigoSecreto(""), 5000);
     }
-  };
+  }
+
+  useEffect(() => {
+    service.getResultado().then((resposta) => {
+      const dataResultado = resposta.data?.at(0).resultado;
+      const map: Map<string, string> = new Map(Object.entries(dataResultado));
+      setResultado(map);
+    });
+  }, []);
 
   return (
     <section className={styles.section}>
-      <h1 className={styles.titulo}>Quem vai tirar o papelzinho?</h1>
-      <form onSubmit={sortear} className={styles.formulario}>
+      <h1 className={styles.titulo}>{participanteDaVez}</h1>
+      {/*  <form className={styles.formulario}>
         <select
           className={styles.input}
           name="participanteDaVez"
@@ -42,12 +52,15 @@ const Sorteador = () => {
         </select>
         <p>Clique em sortear para ver quem é seu amigo secreto!</p>
         <button className={styles.botao}>Sortear</button>
-      </form>
-      {amigoSecreto && (
-        <p role="alert" className={styles.amigo}>
-          {amigoSecreto}
-        </p>
-      )}
+      </form> */}
+      {
+        <>
+          <p role="alert" className={styles.amigo}>
+            {amigoSecreto}
+          </p>
+          <button className={styles.botao} onClick={pegaResultados}>Sortear</button>
+        </>
+      }
       <div className={styles.imagem} />
     </section>
   );
