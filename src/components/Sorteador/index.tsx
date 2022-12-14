@@ -14,53 +14,45 @@ const Sorteador = () => {
   const service = sorteioService(params.identificador as string);
 
   function pegaResultados() {
-    console.log("teste");
     if (resultado.has(participanteDaVez as string)) {
       setAmigoSecreto(resultado.get(participanteDaVez as string) as string);
       setTimeout(() => setAmigoSecreto(""), 5000);
+    } else {
+      setAmigoSecreto(
+        "Ops! Parece que você não participa desse sorteio! Conserte o link ou entre em contato com o criador."
+      );
     }
   }
 
   useEffect(() => {
     service.getResultado().then((resposta) => {
-      const dataResultado = resposta.data?.at(0).resultado;
-      const map: Map<string, string> = new Map(Object.entries(dataResultado));
-      setResultado(map);
+      const dataResultado = resposta.data?.at(0)?.resultado;
+      if (dataResultado) {
+        const map: Map<string, string> = new Map(Object.entries(dataResultado));
+        setResultado(map);
+      } else {
+        setAmigoSecreto(
+          "Ops! Parece que esse jogo não existe! Conserte o link ou entre em contato com o criador."
+        );
+      }
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <section className={styles.section}>
-      <h1 className={styles.titulo}>{participanteDaVez}</h1>
-      {/*  <form className={styles.formulario}>
-        <select
-          className={styles.input}
-          name="participanteDaVez"
-          id="participanteDaVez"
-          placeholder="Selecione o seu nome"
-          value={participanteDaVez}
-          onChange={(evento) => setParticipanteDaVez(evento.target.value)}
-        >
-          <option>Selecione seu nome</option>
-          {participantes.map((participante) => {
-            return (
-              <option key={participante} value={participante}>
-                {participante}
-              </option>
-            );
-          })}
-        </select>
-        <p>Clique em sortear para ver quem é seu amigo secreto!</p>
-        <button className={styles.botao}>Sortear</button>
-      </form> */}
-      {
-        <>
-          <p role="alert" className={styles.amigo}>
-            {amigoSecreto}
-          </p>
-          <button className={styles.botao} onClick={pegaResultados}>Sortear</button>
-        </>
-      }
+      <h1 className={styles.titulo}>
+        Olá, <span>{participanteDaVez}</span>. Vamos descobrir seu amigo
+        secreto!
+      </h1>
+      <>
+        <p role="alert" className={styles.amigo}>
+          {amigoSecreto}
+        </p>
+        <button className={styles.botao} onClick={pegaResultados}>
+          Sortear
+        </button>
+      </>
       <div className={styles.imagem} />
     </section>
   );

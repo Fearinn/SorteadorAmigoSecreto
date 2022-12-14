@@ -10,6 +10,13 @@
   color: #4b69fdfc;
 }
 
+.fieldset {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  border: none;
+}
+
 .container {
   display: flex;
   flex-direction: column;
@@ -35,7 +42,9 @@
     outline: none;
     border-width: 2px;
   }
+}
 
+.container > .input {
   @media (min-width: 1024px) {
     border-right: none;
     border-top-right-radius: 0;

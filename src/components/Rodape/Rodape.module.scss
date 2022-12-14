@@ -20,10 +20,14 @@
   height: 3.5rem;
   width: 9.5rem;
 
-  &:hover {
-    background-color: #4B69FDFC;
+  &:not(:disabled):hover {
+    background-color: #4b69fdfc;
   }
 
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
 }
 
 .imagem {

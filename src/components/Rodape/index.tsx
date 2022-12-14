@@ -30,15 +30,17 @@ const Rodape = () => {
 
       if (registration.status === 201) {
         setMensagem(
-          `Seu sorteio foi salvo! Copie "${window.location.href}", adicione o nome do participante no final e envie-o, para que ele conheça seu amigo secreto.`
+          `Seu sorteio foi salvo! Copie "${window.location.href}sorteio/${identificador}", adicione o nome do participante no final e envie-lhe, para que ele descubra o amigo secreto dele.`
         );
         setIdentificador("");
       }
 
-      if (registration.error)
+      if (registration.error) {
+        setIdentificador("");
         throw new Error(
           `Houve um problema ao salvar seu sorteio. Por favor mude o identificador e tente novamente.`
         );
+      }
     } catch (error) {
       setMensagem(`${error}`);
       setTimeout(() => {
@@ -53,7 +55,7 @@ const Rodape = () => {
     } else {
       estaMontado.current = true;
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [resultado]);
 
   return (
@@ -61,7 +63,7 @@ const Rodape = () => {
       <button
         className={styles.botao}
         onClick={sortear}
-        disabled={participantes?.length < 3}
+        disabled={participantes?.length < 3 || !identificador}
       >
         Iniciar brincadeira
       </button>

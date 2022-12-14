@@ -26,10 +26,15 @@ body,
   text-align: center;
 }
 
+:where(h1, h2, h3, h4, h5, h6)::first-letter {
+  text-transform: uppercase;
+}
+
 :where(button) {
   cursor: pointer;
 }
 
 :where(ul, ol) {
   list-style: none;
+  text-transform: capitalize;
 }

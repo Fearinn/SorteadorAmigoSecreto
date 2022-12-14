@@ -16,6 +16,10 @@
 
 .titulo {
   color: #4b69fdfc;
+
+  span {
+    text-transform: capitalize;
+  }
 }
 
 .input {
@@ -50,6 +54,8 @@
 
 .amigo {
   color: #fe652b;
+  font-size: 1.5rem;
+  text-transform: uppercase;
 }
 
 .imagem {
