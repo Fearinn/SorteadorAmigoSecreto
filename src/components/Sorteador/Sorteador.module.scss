@@ -45,17 +45,16 @@
   box-shadow: 2px 2px 0px black;
   color: white;
   height: 3.5rem;
-  width: 9.5rem;
+  padding: 1rem;
 
   &:hover {
     background-color: #4b69fdfc;
   }
 }
 
-.amigo {
+.mensagem {
   color: #fe652b;
   font-size: 1.5rem;
-  text-transform: uppercase;
 }
 
 .imagem {

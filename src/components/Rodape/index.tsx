@@ -6,6 +6,7 @@ import styles from "./Rodape.module.scss";
 import useMensagemDeErro from "../../state/hooks/useMensagemDeErro";
 import { useResultadoDoSorteio } from "../../state/hooks/useResultadoDoSorteio";
 import { useEffect, useRef } from "react";
+import { useIdsDosParticipantes } from "../../state/hooks/useIdsDosParticipantes";
 
 const PROJECT_URL = "https://xhexdnrmtpfyntwordms.supabase.co";
 const PUBLIC_KEY =
@@ -19,6 +20,7 @@ const Rodape = () => {
   const [resultado] = useResultadoDoSorteio();
   const estaMontado = useRef(false);
   const sortear = useSorteador();
+  const [idsDosParticipantes] = useIdsDosParticipantes();
 
   async function enviaDados() {
     try {
@@ -26,11 +28,12 @@ const Rodape = () => {
         participantes: participantes,
         identificador: identificador,
         resultado: Object.fromEntries(resultado),
+        idsDosParticipantes: Object.fromEntries(idsDosParticipantes),
       });
 
       if (registration.status === 201) {
         setMensagem(
-          `Seu sorteio foi salvo! Copie "${window.location.href}sorteio/${identificador}", adicione o nome do participante no final e envie-lhe, para que ele descubra o amigo secreto dele.`
+          `Seu sorteio foi salvo!`
         );
         setIdentificador("");
       }
@@ -52,6 +55,7 @@ const Rodape = () => {
   useEffect(() => {
     if (estaMontado.current) {
       enviaDados();
+      console.log(idsDosParticipantes);
     } else {
       estaMontado.current = true;
     }

@@ -5,10 +5,15 @@ export const listaDeParticipantes = atom<string[]>({
   default: [],
 });
 
+export const idsDosParticipantes = atom<Map<string, string>>({
+  key: "idsDosParticipantes",
+  default: new Map(),
+});
+
 export const identificadorDoSorteio = atom<string>({
   key: "identificadorDoSorteio",
-  default: ""
-})
+  default: "",
+});
 
 export const erro = atom<string>({
   key: "erro",
@@ -17,6 +22,5 @@ export const erro = atom<string>({
 
 export const resultadoDoAmigoSecreto = atom<Map<string, string>>({
   key: "resultadoDoAmigoSecreto",
-  default: new Map()
-})
-
+  default: new Map(),
+});

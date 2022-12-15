@@ -1,7 +1,10 @@
 import shuffle from "just-shuffle";
+import { geraIdParticipante } from "../../utils/idParticipante";
 
 const realizarSorteio = (participantes: string[]) => {
     const resultado = new Map<string, string>();
+
+    const atribuicaoDeIds = new Map<string, string>()
 
     const participantesEmbaralhos = shuffle(participantes);
 
@@ -13,12 +16,17 @@ const realizarSorteio = (participantes: string[]) => {
       } 
       
       resultado.set(
-        participantesEmbaralhos[index],
+        participante,
         participantesEmbaralhos[indiceDoAmigo]
       );
+
     });
 
-    return resultado
+    participantesEmbaralhos.forEach((participante) => {
+      atribuicaoDeIds.set(participante, geraIdParticipante())
+    })
+
+    return [resultado, atribuicaoDeIds]
 }
 
 export default realizarSorteio

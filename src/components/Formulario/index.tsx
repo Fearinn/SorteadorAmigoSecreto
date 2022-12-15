@@ -8,7 +8,6 @@ const Formulario = () => {
   const [nome, setNome] = useState("");
   const [identificador, setIdentificador] = useState("");
   const [mensagem] = useMensagemDeErro();
-
   const [, setIdentificadorSalvo] = useIdentificadorDoSorteio();
 
   const inputRef = useRef<HTMLInputElement>(null);
@@ -23,7 +22,12 @@ const Formulario = () => {
   }
 
   useEffect(
-    () => setIdentificadorSalvo(identificador.toLowerCase().replace(/\s/g, "")),
+    () => {
+      const identificadorFormatado = identificador
+        .toLowerCase()
+        .replace(/\s/g, "");
+      setIdentificadorSalvo(identificadorFormatado);
+    },
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [identificador]
   );

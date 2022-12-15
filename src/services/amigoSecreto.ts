@@ -10,7 +10,7 @@ const sorteioService = (identificador: string) => {
     getResultado: () => {
       return supabase
         .from("amigosSecretos")
-        .select("resultado")
+        .select("participantes, resultado, idsDosParticipantes")
         .eq("identificador", identificador)      
     },
   };
