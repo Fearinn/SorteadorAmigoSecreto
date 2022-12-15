@@ -39,6 +39,7 @@ const Sorteador = () => {
       const dataParticipantes = resposta.data?.at(0)?.participantes;
 
       if (dataResultado && dataIdsDosParticipantes && dataParticipantes) {
+        console.log(dataIdsDosParticipantes)
         setParticipantes(dataParticipantes);
 
         const mapResultado: Map<string, string> = new Map(
