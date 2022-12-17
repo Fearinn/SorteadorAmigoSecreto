@@ -4,9 +4,9 @@ Project developed during the course [React - Testando seus Components](https://c
 
 # Goals 
 
-- Building a website to organize Secret Santa games.
+- Building a website to organize Secret Santa games;
 - Learning Jest and Test Driven Development (TDD);
-- Additional: using URL params to prevent participants to see others' secret santas.
+- Additional: using URL params to prevent participants to see others' secret santas;
 - Additional: using Supabase to store the games, results and participants.
 
 # Possible improvements
