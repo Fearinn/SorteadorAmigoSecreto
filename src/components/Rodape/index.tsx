@@ -13,6 +13,7 @@ const PUBLIC_KEY =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhoZXhkbnJtdHBmeW50d29yZG1zIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NzA4OTAwNjgsImV4cCI6MTk4NjQ2NjA2OH0.d4R_zi0E03ARxGIgolk7yrSURk1XuoRarLF_2dXPpAI";
 const supabase = createClient(PROJECT_URL, PUBLIC_KEY);
 
+
 const Rodape = () => {
   const participantes = useListaDeParticipantes();
   const [, setMensagem] = useMensagemDeErro();
@@ -33,7 +34,7 @@ const Rodape = () => {
 
       if (registration.status === 201) {
         setMensagem(
-          `Seu sorteio foi salvo!`
+          `Seu sorteio foi salvo! Cada participante pode descobrir seu amigo acessando "${window.location}sorteio/${identificador}/{idDoParticipante}". Os ids são: ${JSON.stringify(Object.fromEntries(idsDosParticipantes))}`
         );
         setIdentificador("");
       }
@@ -55,7 +56,6 @@ const Rodape = () => {
   useEffect(() => {
     if (estaMontado.current) {
       enviaDados();
-      console.log(idsDosParticipantes);
     } else {
       estaMontado.current = true;
     }
