@@ -10,15 +10,17 @@ exports[`página de sorteio a renderização ocorre corretamente 1`] = `
     >
       <h1
         class="titulo"
-      />
-      <p
-        class="amigo"
-        role="alert"
-      />
+      >
+        Olá, 
+        <span />
+        . Vamos descobrir seu amigo secreto!
+      </h1>
+      
       <button
         class="botao"
+        disabled=""
       >
-        Sortear
+        Ver amigo secreto
       </button>
       <div
         class="imagem"

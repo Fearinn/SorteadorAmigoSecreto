@@ -14,7 +14,7 @@ describe("Comportamento do formulário", () => {
     );
 
     const input = screen.getByPlaceholderText(
-      "Insira os nomes dos participantes"
+      "Insira os nomes dos participantes. Pelo menos 3 são necessários para brincar."
     );
 
     const botao = screen.getByRole("button");
@@ -32,7 +32,7 @@ describe("Comportamento do formulário", () => {
     );
 
     const input = screen.getByPlaceholderText(
-      "Insira os nomes dos participantes"
+      "Insira os nomes dos participantes. Pelo menos 3 são necessários para brincar."
     );
 
     const botao = screen.getByRole("button");
@@ -58,7 +58,7 @@ describe("Comportamento do formulário", () => {
     );
 
     const input = screen.getByPlaceholderText(
-      "Insira os nomes dos participantes"
+      "Insira os nomes dos participantes. Pelo menos 3 são necessários para brincar."
     );
 
     const botao = screen.getByRole("button");
@@ -95,7 +95,7 @@ describe("Comportamento do formulário", () => {
     );
 
     const input = screen.getByPlaceholderText(
-      "Insira os nomes dos participantes"
+      "Insira os nomes dos participantes. Pelo menos 3 são necessários para brincar."
     );
 
     const botao = screen.getByRole("button");

@@ -2,32 +2,34 @@ import { fireEvent, render, screen } from "@testing-library/react";
 import { RecoilRoot } from "recoil";
 import {useListaDeParticipantes} from "../../state/hooks/useListaDeParticipantes";
 import Rodape from ".";
-
-const mockNavegacao = jest.fn();
-const mockSorteio = jest.fn()
+import { useIdentificadorDoSorteio } from "../../state/hooks/useIdentificadorDoSorteio";
 
 jest.mock("../../state/hooks/useListaDeParticipantes", () => {
   return {
-    useListaDeParticipantes: jest.fn()
+    useListaDeParticipantes: jest.fn(),
   }
 });
 
-jest.mock("react-router-dom", () => {
+jest.mock("../../state/hooks/useIdentificadorDoSorteio", () => {
   return {
-    useNavigate: () => mockNavegacao,
-  };
-});
+    useIdentificadorDoSorteio: jest.fn(),
+  }
+})
 
-jest.mock("../../state/hooks/useSorteador.ts", () => {
+jest.mock("../../state/hooks/useSorteador", () => {
   return {
     useSorteador: () => mockSorteio,
   };
 });
 
+const mockSorteio = jest.fn()
+
 describe("não há participantes suficientes", () => {
   beforeEach(() => {
-    (useListaDeParticipantes as jest.Mock).mockReturnValue([]);
+    (useListaDeParticipantes as jest.Mock).mockReturnValue([[],]);
+    (useIdentificadorDoSorteio as jest.Mock).mockReturnValue(["identificador",])
   });
+
   test("o jogo não pode ser iniciado", () => {
     render(
       <RecoilRoot>
@@ -48,6 +50,7 @@ describe("há participantes suficientes", () => {
       "Isa",
       "Matheus",
     ]);
+    (useIdentificadorDoSorteio as jest.Mock).mockReturnValue(["identificador",])
   });
   test("a brincadeira pode ser iniciada", () => {
     render(
@@ -71,7 +74,6 @@ describe("há participantes suficientes", () => {
     const botao = screen.getByRole("button")
 
     fireEvent.click(botao)
-    expect(mockNavegacao).toHaveBeenCalledWith("/sorteio")
     expect(mockSorteio).toHaveBeenCalledTimes(1)
   });
 });

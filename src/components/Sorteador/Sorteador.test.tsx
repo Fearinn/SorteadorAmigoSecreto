@@ -1,8 +1,10 @@
 import { act, fireEvent, render, screen } from "@testing-library/react";
 import { RecoilRoot } from "recoil";
-import { useListaDeParticipantes } from "../../state/hooks/useListaDeParticipantes";
-import { useResultadoDoSorteio } from "../../state/hooks/useResultadoDoSorteio";
 import Sorteador from ".";
+import { BrowserRouter } from "react-router-dom";
+import { useParams } from "react-router";
+import { useListaDeParticipantes } from "../../state/hooks/useListaDeParticipantes";
+import { useDataResultado } from "../../state/hooks/useDataResultado";
 
 jest.mock("../../state/hooks/useListaDeParticipantes", () => {
   return {
@@ -10,57 +12,63 @@ jest.mock("../../state/hooks/useListaDeParticipantes", () => {
   };
 });
 
-jest.mock("../../state/hooks/useResultadoDoSorteio", () => {
+jest.mock("../../state/hooks/useDataResultado.ts", () => {
   return {
-    useResultadoDoSorteio: jest.fn(),
+    useDataResultado: jest.fn()
+  }
+})
+
+jest.mock("react-router", () => {
+  return {
+    ...jest.requireActual("react-router"),
+    useParams: jest.fn(),
+  };
+});
+
+jest.mock("../../state/hooks/useIdsDosParticipantes.ts", () => {
+  return {
+    useIdsDosParticipantes: jest.fn(),
   };
 });
 
 describe("página de sorteio", () => {
-  const participantes = ["Vivih", "Matheus", "Isa"];
+  const participantes = ["vivih", "matheus", "isa"];
 
-  const resultado = new Map([
-    ["Vivih", "Matheus"],
-    ["Isa", "Vivih"],
-    ["Matheus", "Isa"],
-  ]);
+  const resultado = "matheus";
 
   beforeEach(() => {
-    (useListaDeParticipantes as jest.Mock).mockReturnValue(participantes);
-    (useResultadoDoSorteio as jest.Mock).mockReturnValue(resultado);
-  });
-  test("todos os participantes podem exibir seu amigo secreto", () => {
-    render(
-      <RecoilRoot>
-        <Sorteador />
-      </RecoilRoot>
-    );
 
-    const opcoes = screen.getAllByRole("option");
+    (useParams as jest.Mock).mockReturnValue({
+      identificador: "identificador",
+      nome: "matheus",
+      idDoParticipante: "1",
+    });
 
-    expect(opcoes).toHaveLength(participantes.length);
+    (useListaDeParticipantes as jest.Mock).mockReturnValue([participantes]);
+
+    (useDataResultado as jest.Mock).mockReturnValue([resultado]);
   });
 
   test("o amigo secreto é exibido quando solicitado", () => {
     render(
-      <RecoilRoot>
-        <Sorteador />
-      </RecoilRoot>
+      <BrowserRouter>
+        <RecoilRoot>
+          <Sorteador/>
+        </RecoilRoot>
+      </BrowserRouter>
     );
 
-    const select = screen.getByPlaceholderText("Selecione o seu nome");
+    let amigoSecreto = screen.queryByRole("alert");
 
-    fireEvent.change(select, {
-      target: {
-        value: participantes[0],
-      },
-    });
+    expect(amigoSecreto).not.toBeInTheDocument();
 
     const botao = screen.getByRole("button");
 
+    expect(botao).not.toBeDisabled()
+
     fireEvent.click(botao);
 
-    const amigoSecreto = screen.getByRole("alert");
+    amigoSecreto = screen.getByRole("alert")
 
     expect(amigoSecreto).toBeInTheDocument();
   });
@@ -69,18 +77,12 @@ describe("página de sorteio", () => {
     jest.useFakeTimers();
 
     render(
-      <RecoilRoot>
-        <Sorteador />
-      </RecoilRoot>
+      <BrowserRouter>
+        <RecoilRoot>
+          <Sorteador/>
+        </RecoilRoot>
+      </BrowserRouter>
     );
-
-    const select = screen.getByPlaceholderText("Selecione o seu nome");
-
-    fireEvent.change(select, {
-      target: {
-        value: participantes[0],
-      },
-    });
 
     const botao = screen.getByRole("button");
 

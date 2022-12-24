@@ -15,10 +15,10 @@ const supabase = createClient(PROJECT_URL, PUBLIC_KEY);
 
 
 const Rodape = () => {
-  const participantes = useListaDeParticipantes();
+  const [participantes] = useListaDeParticipantes();
   const [, setMensagem] = useMensagemDeErro();
-  const [identificador, setIdentificador] = useIdentificadorDoSorteio();
-  const [resultado] = useResultadoDoSorteio();
+  const [identificador,] = useIdentificadorDoSorteio();
+  const [resultado,] = useResultadoDoSorteio();
   const estaMontado = useRef(false);
   const sortear = useSorteador();
   const [idsDosParticipantes] = useIdsDosParticipantes();
@@ -36,11 +36,11 @@ const Rodape = () => {
         setMensagem(
           `Seu sorteio foi salvo! Cada participante pode descobrir seu amigo acessando "${window.location}sorteio/${identificador}/{idDoParticipante}". Os ids são: ${JSON.stringify(Object.fromEntries(idsDosParticipantes))}`
         );
-        setIdentificador("");
+       // setIdentificador("");
       }
 
       if (registration.error) {
-        setIdentificador("");
+      //  setIdentificador("");
         throw new Error(
           `Houve um problema ao salvar seu sorteio. Por favor mude o identificador e tente novamente.`
         );

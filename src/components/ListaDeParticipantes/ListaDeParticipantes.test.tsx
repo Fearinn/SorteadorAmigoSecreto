@@ -1,15 +1,18 @@
 import { render, screen } from "@testing-library/react";
 import { RecoilRoot } from "recoil";
-import {useListaDeParticipantes} from "../../state/hooks/useListaDeParticipantes";
+import { useListaDeParticipantes } from "../../state/hooks/useListaDeParticipantes";
 import ListaDeParticipantes from ".";
 
 jest.mock("../../state/hooks/useListaDeParticipantes", () => {
   return {
-    useListaDeParticipantes: jest.fn()
-  }
-})
+    useListaDeParticipantes: jest.fn(),
+  };
+});
 
 describe("lista de participantes vazia", () => {
+  beforeEach(() => {
+    (useListaDeParticipantes as jest.Mock).mockReturnValue([[]]);
+  });
   test("lista de participantes é renderizada vazia", () => {
     render(
       <RecoilRoot>
@@ -26,7 +29,7 @@ describe("lista de participantes vazia", () => {
 describe("lista de participantes preenchida", () => {
   const participantes = ["Vivih", "Isa"];
   beforeEach(() =>
-    (useListaDeParticipantes as jest.Mock).mockReturnValue(participantes)
+    (useListaDeParticipantes as jest.Mock).mockReturnValue([participantes])
   );
   test("lista é renderizada sem participantes", () => {
     render(

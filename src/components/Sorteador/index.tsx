@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
-import sorteioService from "../../services/amigoSecreto";
+import { sorteioService } from "../../services/amigoSecreto";
+import { useDataResultado } from "../../state/hooks/useDataResultado";
+import { useListaDeParticipantes } from "../../state/hooks/useListaDeParticipantes";
 import styles from "./Sorteador.module.scss";
 
 const Sorteador = () => {
   const [amigoSecreto, setAmigoSecreto] = useState("");
-  const [resultado, setResultado] = useState("");
-  const [participantes, setParticipantes] = useState<string[]>([]);
+  const [resultado, setResultado] = useDataResultado();
+  const [participantes, setParticipantes] = useListaDeParticipantes();
   const params = useParams();
   const participanteDaVez = params.nome;
   const idDoParticipanteDaVez = params.idDoParticipante;
@@ -18,12 +20,15 @@ const Sorteador = () => {
 
   useEffect(() => {
     service.getResultado().then((resposta) => {
-      const dataResultado =
+      const dataResultado: string =
         resposta.data?.at(0)[idDoParticipanteDaVez as string];
-      const dataParticipantes = resposta.data?.at(0).participantes;
-      if (dataResultado && dataParticipantes) {
-        setParticipantes(dataParticipantes);
-        setResultado(dataResultado);
+      const dataParticipantes: string[] = resposta.data?.at(0).participantes;
+      if (
+        (dataResultado && dataParticipantes) ||
+        (resultado && participantes.length > 0)
+      ) {
+        setParticipantes(dataParticipantes || participantes);
+        setResultado(dataResultado || resultado);
       } else {
         setAmigoSecreto(
           "Ops! Parece que esse jogo não existe ou você não participa dele! Conserte o link ou entre em contato com o criador do sorteio."
@@ -34,13 +39,8 @@ const Sorteador = () => {
   }, []);
 
   function pegaResultados() {
-    setAmigoSecreto(resultado)
+    setAmigoSecreto(resultado);
     setTimeout(() => setAmigoSecreto(""), 5000);
-    /* } else {
-      setAmigoSecreto(
-        "Ops! Parece que você não participa desse sorteio! Conserte o link ou entre em contato com o criador do sorteio."
-      );
-    } */
   }
 
   return (
@@ -59,10 +59,16 @@ const Sorteador = () => {
           </ul>
         </>
       )}
-      <p role="alert" className={styles.mensagem}>
-        {amigoSecreto}
-      </p>
-      <button className={styles.botao} onClick={pegaResultados} disabled={!resultado}>
+      {amigoSecreto && (
+        <p role="alert" className={styles.mensagem}>
+          {amigoSecreto}
+        </p>
+      )}
+      <button
+        className={styles.botao}
+        onClick={pegaResultados}
+        disabled={!resultado}
+      >
         Ver amigo secreto
       </button>
 

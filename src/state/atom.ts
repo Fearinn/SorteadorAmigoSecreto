@@ -22,5 +22,10 @@ export const erro = atom<string>({
 
 export const resultadoDoAmigoSecreto = atom<Map<string, string>>({
   key: "resultadoDoAmigoSecreto",
-  default: new Map(),
+  default: new Map()
 });
+
+export const dataResultado = atom<string>({
+  key: "dataResultado",
+  default: ""
+})

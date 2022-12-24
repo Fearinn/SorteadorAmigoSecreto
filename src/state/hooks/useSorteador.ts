@@ -6,7 +6,7 @@ import { useIdsDosParticipantes } from "./useIdsDosParticipantes"
 
 
 export const useSorteador = () => {
-  const participantes = useListaDeParticipantes();
+  const [participantes] = useListaDeParticipantes();
   const [,setResultado] = useResultadoDoSorteio();
   const [,setIdsDosParticipantes] = useIdsDosParticipantes()
 
